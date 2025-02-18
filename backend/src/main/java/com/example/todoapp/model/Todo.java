@@ -1,8 +1,5 @@
 package com.example.todoapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
 import jakarta.persistence.*;
 
 @Entity
@@ -24,6 +21,8 @@ public class Todo {
 
     @Column(nullable = false)
     private boolean completed;
+
+    public Todo() {}
 
     // Getter & Setter
     public Long getId() {
