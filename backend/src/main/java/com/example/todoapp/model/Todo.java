@@ -22,7 +22,7 @@ public class Todo {
     @Column(nullable = false)
     private boolean completed;
 
-    public Todo() {}
+    public Todo() {} // <--- Standard-Konstruktor ist Pflicht
 
     // Getter & Setter
     public Long getId() {

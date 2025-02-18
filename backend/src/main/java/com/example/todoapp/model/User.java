@@ -22,7 +22,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Todo> todos;
 
-    public User() {}  // Standard-Konstruktor hinzugefügt!
+    public User() {} // <--- Standard-Konstruktor ist Pflicht
 
     // Getter und Setter
     public Long getId() {
