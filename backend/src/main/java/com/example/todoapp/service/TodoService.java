@@ -1,5 +1,6 @@
 package com.example.todoapp.service;
 
+import com.example.todoapp.model.User;
 import com.example.todoapp.model.Todo;
 import com.example.todoapp.repository.TodoRepository;
 import org.springframework.stereotype.Service;

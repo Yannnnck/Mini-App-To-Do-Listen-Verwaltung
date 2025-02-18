@@ -5,7 +5,9 @@ import com.example.todoapp.model.User;
 import com.example.todoapp.service.TodoService;
 import com.example.todoapp.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -14,10 +16,12 @@ import java.util.Optional;
 public class AuthController {
     private final UserService userService;
     private final TodoService todoService;
+    private final PasswordEncoder passwordEncoder;
 
-    public AuthController(UserService userService, TodoService todoService) {
+    public AuthController(UserService userService, TodoService todoService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.todoService = todoService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/register")
@@ -27,15 +31,15 @@ public class AuthController {
         if (userService.findByUsername(username).isPresent()) {
             return ResponseEntity.badRequest().body("Benutzername existiert bereits");
         }
-        userService.registerUser(username, email, password);
+        String hashedPassword = passwordEncoder.encode(password);
+        userService.registerUser(username, email, hashedPassword);
         return ResponseEntity.ok("Benutzer erfolgreich registriert");
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestParam String username, @RequestParam String password) {
         Optional<User> userOptional = userService.findByUsername(username);
-        if (userOptional.isPresent() && 
-            new BCryptPasswordEncoder().matches(password, userOptional.get().getPassword())) {
+        if (userOptional.isPresent() && passwordEncoder.matches(password, userOptional.get().getPassword())) {
             return ResponseEntity.ok("Login erfolgreich");
         }
         return ResponseEntity.badRequest().body("Ungültige Anmeldedaten");
