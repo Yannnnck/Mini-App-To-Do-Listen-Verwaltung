@@ -1,0 +1,75 @@
+{
+    "info": {
+        "name": "To-Do App API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Register User",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+                ],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        { "key": "username", "value": "testuser" },
+                        { "key": "email", "value": "test@example.com" },
+                        { "key": "password", "value": "Passwort123" }
+                    ]
+                },
+                "url": "http://localhost:8080/auth/register"
+            }
+        },
+        {
+            "name": "Login User",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+                ],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        { "key": "username", "value": "testuser" },
+                        { "key": "password", "value": "Passwort123" }
+                    ]
+                },
+                "url": "http://localhost:8080/auth/login"
+            }
+        },
+        {
+            "name": "Get Todos",
+            "request": {
+                "method": "GET",
+                "url": "http://localhost:8080/todos/testuser"
+            }
+        },
+        {
+            "name": "Add Todo",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+                ],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        { "key": "username", "value": "testuser" },
+                        { "key": "title", "value": "Einkaufen" },
+                        { "key": "description", "value": "Milch, Brot, Eier" }
+                    ]
+                },
+                "url": "http://localhost:8080/todos/add"
+            }
+        },
+        {
+            "name": "Delete Todo",
+            "request": {
+                "method": "DELETE",
+                "url": "http://localhost:8080/todos/delete/1"
+            }
+        }
+    ]
+}
